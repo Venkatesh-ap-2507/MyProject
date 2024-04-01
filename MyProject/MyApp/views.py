@@ -10,7 +10,7 @@ def register(request):
         email = request.POST.get('email')
         password = request.POST.get("password")
 
-        user = User.objects.create_user(username=username, password=password, email=email)
+        user = User.objects.create_user(username=username, password=password, email=email)  
         return render(request,"success.html")
     return render(request,'register.html')
 
