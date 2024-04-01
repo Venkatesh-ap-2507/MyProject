@@ -6,13 +6,14 @@ def home(request):
     return render(request,'home.html')
 
 def register(request):
-    # if request.metod == "POST":
-        # username = request.POST.get("username")
-        # email = request.POST.get('email')
-        # password = request.POST.get("password")
+    if request.metod == "POST":
+        username = request.POST.get("username")
+        email = request.POST.get('email')
+        password1 = request.POST.get("password1")
+        password2 = request.POST.get("password2")
 
-        # user = User.objects.create_user(username=username, password=password, email=email)  
-        # return render(request,"success.html")
+        user = User.objects.create_user(username=username, password1=password1,password2=password2, email=email)  
+        
     return render(request,'register.html')
 
 def login(request):
