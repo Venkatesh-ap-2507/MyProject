@@ -59,16 +59,18 @@
                             <div class="login-title">
                                 <h2 class="text-center text-primary">Login To Book App</h2>
                             </div>
-                            <form>
+                            <form  method="POST">
+                                {% csrf_token %}
                             <div class="input-group custom">
-                                <input type="text" class="form-control form-control-lg" placeholder="Username">
+                                <input type="text" class="form-control form-control-lg" placeholder="Username" name="username">
+
                                 <div class="input-group-append custom">
                                     <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
                                 </div>
                                 </div>
                                 <div class="input-group custom">
-                                    <input type="password" class="form-control form-control-lg"
-                                        placeholder="password"id="password" name="pass" >
+                                <input type="password" class="form-control form-control-lg" placeholder="password" id="password" name="pass">
+
                                     <div class="input-group-append custom">
                                         <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
                                     </div>
