@@ -11,6 +11,7 @@ def home(request):
 
 def register(request):
     if request.method == "POST":
+        # username = request.POST.get('username')
         email = request.POST.get('email')
         pass1 = request.POST.get("password1")
         pass2 = request.POST.get("password2")
@@ -19,8 +20,7 @@ def register(request):
             return HttpResponse("Your password does not match")
         else:
             # Use create_user with only email and password
-            my_user = CustomUser.objects.create_user(
-                email=email, password=pass1)
+            my_user = CustomUser.objects.create_user(email=email, password=pass1)
             return redirect("login")
     return render(request, 'register.html')
 
