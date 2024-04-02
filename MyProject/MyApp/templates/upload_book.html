@@ -1,0 +1,12 @@
+{% extends "home.html" %}
+
+{% block content %}
+    <div style="width: 30%; margin: 0 auto;">
+        <h1>Upload Books</h1>
+        <form method="post" enctype="multipart/form-data" action="{% url 'upload_book' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+{% endblock %}
