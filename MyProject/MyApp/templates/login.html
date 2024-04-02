@@ -59,6 +59,13 @@
                             <div class="login-title">
                                 <h2 class="text-center text-primary">Login To Book App</h2>
                             </div>
+                             {% if messages %}
+                                <ul class="text-danger">
+                                    {% for message in messages %}
+                                    <div>{{ message }}</div>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
                             <form  method="POST">
                                 {% csrf_token %}
                             <div class="input-group custom">

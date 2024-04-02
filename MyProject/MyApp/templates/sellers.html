@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <head name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body
+    <h1>Sellers Name</h1>
+    <div>
+        <table border="2px">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+            {% for sell in seller %}
+            <tr>
+
+                <td>{{ sell.name }}</td>
+                <td>{{ sell.email }}</td>
+
+            </tr>
+            {% endfor %}
+        </table>
+        </body>
+
+</head>

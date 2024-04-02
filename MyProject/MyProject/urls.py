@@ -23,5 +23,5 @@ urlpatterns = [
     path("login/",views.login,name="login"),
     path("home/", views.home, name="home"),
     path("logout/", views.logout_page, name="logout"),
-    path('app/', include("author_sellers.urls")),
+    path('app/', include("MyApp.urls")),
 ]

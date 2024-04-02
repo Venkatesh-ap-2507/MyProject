@@ -6,21 +6,20 @@ from .managers import CustomUserManager
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(_("email address"), unique=True)
-    public_visibility = models.BooleanField(
-        _("public visibility"), default=True)
-    age = models.PositiveIntegerField(_("age"), blank=True, null=True)
-    birth_year = models.PositiveIntegerField(
-        _("birth year"), blank=True, null=True)
-    address = models.CharField(_("address"), max_length=255, blank=True)
-    is_staff = models.BooleanField(_("staff status"), default=False)
-    is_active = models.BooleanField(_("active"), default=True)
-    date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
+    username = models.CharField(max_length=150, unique=True)
+    email = models.EmailField(unique=True)
+    public_visibility = models.BooleanField(default=True)
+    age = models.IntegerField(null=True, blank=True)
+    birth_year = models.PositiveIntegerField(null=True, blank=True)
+    address = models.CharField(max_length=255, blank=True)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    date_joined = models.DateTimeField(default=timezone.now)
 
-    USERNAME_FIELD = "email"
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.email
+        return self.username
