@@ -3,6 +3,13 @@
 {% block content %}
     <div style="width: 30%; margin: 0 auto;">
         <h1>Upload Books</h1>
+        {% if messages %}
+            {% for message in messages %}
+            <div>
+            {{message}}
+            </div>
+            {% endfor %}
+        {% endif %}
         <form method="post" enctype="multipart/form-data" action="{% url 'upload_book' %}">
             {% csrf_token %}
             {{ form.as_p }}

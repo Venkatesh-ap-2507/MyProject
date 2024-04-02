@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .models import CustomUser
 from .models import UploadedFile
 from .forms import UploadBookForm
+from django.contrib import messages
 
 
 @login_required(login_url='login')
@@ -19,7 +20,6 @@ def register(request):
         pass1 = request.POST.get("password1")
         pass2 = request.POST.get("password2")
         public_visibility = request.POST.get('publicv') == "on"
-        CustomUser.objects.all().delete()
         if pass1 != pass2:
             return HttpResponse("Your password does not match")
         else:
@@ -62,15 +62,22 @@ def upload_book(request):
         if form.is_valid():
             UploadedFile = form.save(commit=False)
             if request.user.is_authenticated:
-                UploadedFile.user_id = request.user_id
+                UploadedFile.user_id = request.user.id
             UploadedFile.save()
+            messages.success(request,'Your book has been uploaded successfully!')
             return redirect('upload_book')
         else:
             form = UploadBookForm()
         return render(request, 'upload_book.html', {'form': form})
     return render(request, 'upload_book.html')
 
+def view_book(request):
+    view_books = UploadBookForm.objects.all()
+    return  render(request, "view_book.html", {"view_books" : view_books})
 
+def view_user_books(request):
+    view_books = UploadBookForm.objects.filter(visibility=True,user_id=request.user.id)
+    return render(request, "view_users_books.html",{ "view_books" : view_books})
     # if request.method=="POST":
     #     form = UploadFileForm(request.POST, request.FILES)
     #     if form.is_valid():
