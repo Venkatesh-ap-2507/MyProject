@@ -7,9 +7,11 @@ from .models import UploadedFile
 from .forms import UploadBookForm
 from django.contrib import messages
 # from create_engine import engine
-from .models import engine
-from sqlalchemy.sql import text
-
+from MyApp.models import UploadedFile
+from django.shortcuts import render
+from sqlalchemy import text
+from sqlalchemy import create_engine
+import pandas as pd
 
 @login_required(login_url='login')
 def home(request):
@@ -84,11 +86,29 @@ def view_user_books(request):
     return render(request, "view_users_books.html", {'view_books': view_books})
 
 def fetch_data(request):
+    
+    # DATABASE_URL = 'postgresql://postgres:root123@localhost/socail_book'
+    NAME = 'socail_book'
+    USER = 'postgres'
+    PASSWORD = 'root123'
+    HOST = 'localhost'
+    PORT = '5432'
+
+    engine = create_engine(f'postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}')
+
     with engine.connect() as connection:
-        sql_query = text("SELECT * FROM MyApp_uploadedfile")
+        sql_query = text(
+            """SELECT * FROM public."MyApp_uploadedfile" ORDER BY id ASC;""")
         result = connection.execute(sql_query)
+        # result = pd.read_sql_query(sql_query,engine)
+        print(result)
         view_books = result.fetchall()
-    return render(request, "enginedata.html", {'view_books': view_books})
+    return render(request, 'enginedata.html', {'view_books': view_books})
+
+
+# def fetch_data(request):
+#     view_books = UploadedFile.objects.all()
+#     return render(request, "enginedata.html", {'view_books': view_books})
 
 
 

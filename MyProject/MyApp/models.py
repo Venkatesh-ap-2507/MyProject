@@ -3,9 +3,13 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from .managers import CustomUserManager
-from sqlalchemy import create_engine
 
-engine = create_engine('postgresql://postgresql:root123@localhost/social_book')
+
+
+# Replace 'your_username', 'your_password', and 'your_database_name' with actual values
+
+
+# engine = create_engine('postgresql://postgresql:root123@localhost/socail_book')
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=150, unique=True, default="Default")
     email = models.EmailField(unique=True)
