@@ -24,4 +24,6 @@ urlpatterns = [
     path("home/", views.home, name="home"),
     path("logout/", views.logout_page, name="logout"),
     path('app/', include("MyApp.urls")),
+    path('api/auth/', include('djoser.urls')),
+    path('api/auth/', include('djoser.urls.authtoken')),
 ]

@@ -102,6 +102,9 @@ DATABASES = {
     }
 }
 
+DJOSER = {
+    'LOGIN_FIELD': 'email',
+      }
 # media
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_URL = "/media/"
