@@ -3,8 +3,9 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from .managers import CustomUserManager
+from sqlalchemy import create_engine
 
-
+engine = create_engine('postgresql://postgresql:root123@localhost/social_book')
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=150, unique=True, default="Default")
     email = models.EmailField(unique=True)
@@ -32,8 +33,6 @@ class UploadedFile(models.Model):
     description = models.CharField(max_length=500)
     cost = models.IntegerField()
     year_of_published = models.IntegerField()
-    file = models.FileField(upload_to='uploads_books/', default=None)
+    file = models.FileField(upload_to='books/', default=None)
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.title

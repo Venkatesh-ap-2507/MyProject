@@ -1,0 +1,49 @@
+{% extends "home.html" %}
+
+{% block content %}
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<h3>View Books</h3>
+<table border="2">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Cost</th>
+            <th>Description</th>
+            <th>PDF File</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in view_books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.cost }}</td>
+            <td>{{ book.description }}</td>
+            <td>
+                {% if book.file %}
+                <a href="{{ MEDIA_URL }}{{ book.file.url }}" target="_blank">View / Download PDF</a>
+                {% else %}
+                N/A
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

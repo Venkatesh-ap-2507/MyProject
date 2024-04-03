@@ -2,10 +2,13 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login ,logout
 from django.contrib.auth.decorators import login_required
-from .models import CustomUser
+from .models import CustomUser,UploadedFile
 from .models import UploadedFile
 from .forms import UploadBookForm
 from django.contrib import messages
+# from create_engine import engine
+from .models import engine
+from sqlalchemy.sql import text
 
 
 @login_required(login_url='login')
@@ -66,18 +69,29 @@ def upload_book(request):
             UploadedFile.save()
             messages.success(request,'Your book has been uploaded successfully!')
             return redirect('upload_book')
-        else:
-            form = UploadBookForm()
-        return render(request, 'upload_book.html', {'form': form})
-    return render(request, 'upload_book.html')
+    form = UploadBookForm()
+    return render(request, 'upload_book.html', {'form': form})
+
 
 def view_book(request):
-    view_books = UploadBookForm.objects.all()
-    return  render(request, "view_book.html", {"view_books" : view_books})
+    view_books = UploadedFile.objects.all()
+    return render(request, "view_book.html", {'view_books': view_books})
+
 
 def view_user_books(request):
-    view_books = UploadBookForm.objects.filter(visibility=True,user_id=request.user.id)
-    return render(request, "view_users_books.html",{ "view_books" : view_books})
+    view_books = UploadedFile.objects.filter(
+        visibility=True, user_id=request.user.id)
+    return render(request, "view_users_books.html", {'view_books': view_books})
+
+def fetch_data(request):
+    with engine.connect() as connection:
+        sql_query = text("SELECT * FROM MyApp_uploadedfile")
+        result = connection.execute(sql_query)
+        view_books = result.fetchall()
+    return render(request, "enginedata.html", {'view_books': view_books})
+
+
+
     # if request.method=="POST":
     #     form = UploadFileForm(request.POST, request.FILES)
     #     if form.is_valid():

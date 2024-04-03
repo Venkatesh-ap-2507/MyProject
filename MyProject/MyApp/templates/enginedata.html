@@ -1,0 +1,51 @@
+{% extends "home.html" %}
+
+{% block content %}
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+</style>
+
+<h3>View Books</h3>
+<table border="2">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Cost</th>
+            <th>Description</th>
+            <th>Download Book</th>
+        </tr>
+    </thead>
+    <tr>
+        <th>Book name</th>
+        <th>Discription</th>
+        <th>Publish year</th>
+        <th>PDF file</th>
+    </tr>
+    {% for books in view_books %}
+    <tr>
+    
+        <td>{{ books.title }}</td>
+        <td>{{ books.description }}</td>
+        <td>{{ books.year_publish }}</td>
+        <td>{{ books.file }}</td>
+    
+    </tr>
+    {% endfor %}
+    </table>
+    </div>
+{% endblock %}

@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'MyApp',
+    'rest_framework',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -79,10 +81,20 @@ WSGI_APPLICATION = 'MyProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'socail_book',
+        'USER': 'postgres',
+        'PASSWORD':'root123',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
+# media
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = "/media/"
+MEDIA_URL = '/F:/Markytics Task/Book_social/MyProject/media/'
+
 
 
 # Password validation
