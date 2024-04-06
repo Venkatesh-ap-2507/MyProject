@@ -17,11 +17,13 @@
     th {
         background-color: #f2f2f2;
     }
-
+     tr:hover {
+        background-color: #f5f5f5;
+    }
 </style>
 
 <h3>View Fetch Books</h3>
-<table border="2">
+<table border="2" id="BookTable">
     <tr>
         <th>Book name</th>
         <th>Discription</th>
@@ -39,5 +41,20 @@
     </tr>
     {% endfor %}
     </table>
-    </div>
+    <script>
+        //get the table element by it id 
+        var table = document.getElementById("BookTable");
+        //get all the rows of the table
+        var rows = table.getElementsByTagName("tr");
+        //  Added event listener to each row of the table
+        for (var i = 0; i < rows.length; i++) {
+            // add event listener for mouseenter and mouse leave events
+            rows[i].addEventListener("mouseenter", function () {
+                this.style.backgroundColor = "#00FFFF"
+            });
+            rows[i].addEventListener("mouseleave", function () {
+                this.style.backgroundColor = "";
+            });
+        }
+    </script>
 {% endblock %}

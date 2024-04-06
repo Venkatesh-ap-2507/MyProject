@@ -35,7 +35,7 @@
     </thead>
     <tbody>
         {% for book in view_books %}
-        <tr>
+        <tr data-title="{{ book.title }}" data-cost="{{ book.cost }}" data-desc="{{ book.description }}">
             <td>{{ book.title }}</td>
             <td>{{ book.cost }}</td>
             <td>{{ book.description }}</td>
@@ -60,11 +60,19 @@
     {
         // add event listener for mouseenter and mouse leave events
         rows[i].addEventListener("mouseenter",function(){
-            this.style.backgroundColor="#f5f5f5"
+            this.style.backgroundColor="#00FFFF"
         });
         rows[i].addEventListener("mouseleave",function(){
             this.style.backgroundColor="";
         });
-    }
+
+        //added click event listener to show book details 
+        rows[i].addEventListener('click', function() {
+            var title =this.getAttribute("data-title")
+            var cost =this.getAttribute("data-cost")
+            var description = this.getAttribute("data-desc")
+            alert("Book Details:\nTitle: "+title+"\nCost:"+cost+ "\ndescription :"+description);
+        });
+            }
 </script>
 {% endblock %}
